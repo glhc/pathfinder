@@ -11,3 +11,6 @@
 - [A\* Search Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
 
+## Map
+
+- [Poisson Diagram](https://observablehq.com/@mbostock/poisson-disc-distribution?collection=@observablehq/algorithms)

@@ -1,11 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
+import Map from './components/Map/Map.js';
+
 import './App.css';
 
 function App() {
+  const width = window.innerWidth;
+  const height = window.innerWidth;
+
   return (
     <main>
-      <p>It works!</p>
+      <Map width={width} height ={height}/>
     </main>
   );
 }
