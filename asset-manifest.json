@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/glhc/pathfinder/static/css/main.d1b05096.chunk.css",
+    "main.js": "/glhc/pathfinder/static/js/main.6453cdb1.chunk.js",
+    "main.js.map": "/glhc/pathfinder/static/js/main.6453cdb1.chunk.js.map",
+    "runtime-main.js": "/glhc/pathfinder/static/js/runtime-main.5cd19ed0.js",
+    "runtime-main.js.map": "/glhc/pathfinder/static/js/runtime-main.5cd19ed0.js.map",
+    "static/js/2.eff90442.chunk.js": "/glhc/pathfinder/static/js/2.eff90442.chunk.js",
+    "static/js/2.eff90442.chunk.js.map": "/glhc/pathfinder/static/js/2.eff90442.chunk.js.map",
+    "index.html": "/glhc/pathfinder/index.html",
+    "precache-manifest.62cfe6728e82de99f3f3530826ac1444.js": "/glhc/pathfinder/precache-manifest.62cfe6728e82de99f3f3530826ac1444.js",
+    "service-worker.js": "/glhc/pathfinder/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/glhc/pathfinder/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.eff90442.chunk.js.LICENSE.txt": "/glhc/pathfinder/static/js/2.eff90442.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/glhc/pathfinder/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5cd19ed0.js",
+    "static/js/2.eff90442.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.6453cdb1.chunk.js"
+  ]
+}
