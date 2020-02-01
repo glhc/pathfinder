@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/glhc/pathfinder/static/css/main.d1b05096.chunk.css",
-    "main.js": "/glhc/pathfinder/static/js/main.6dbf7680.chunk.js",
-    "main.js.map": "/glhc/pathfinder/static/js/main.6dbf7680.chunk.js.map",
-    "runtime-main.js": "/glhc/pathfinder/static/js/runtime-main.5cd19ed0.js",
-    "runtime-main.js.map": "/glhc/pathfinder/static/js/runtime-main.5cd19ed0.js.map",
-    "static/js/2.5006c4f9.chunk.js": "/glhc/pathfinder/static/js/2.5006c4f9.chunk.js",
-    "static/js/2.5006c4f9.chunk.js.map": "/glhc/pathfinder/static/js/2.5006c4f9.chunk.js.map",
-    "index.html": "/glhc/pathfinder/index.html",
-    "precache-manifest.c839f429f34f5b115b9e8116c9014e2e.js": "/glhc/pathfinder/precache-manifest.c839f429f34f5b115b9e8116c9014e2e.js",
-    "service-worker.js": "/glhc/pathfinder/service-worker.js",
-    "static/css/main.d1b05096.chunk.css.map": "/glhc/pathfinder/static/css/main.d1b05096.chunk.css.map",
-    "static/js/2.5006c4f9.chunk.js.LICENSE.txt": "/glhc/pathfinder/static/js/2.5006c4f9.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/glhc/pathfinder/static/media/logo.5d5d9eef.svg"
+    "main.css": "/pathfinder/static/css/main.d1b05096.chunk.css",
+    "main.js": "/pathfinder/static/js/main.67bc680a.chunk.js",
+    "main.js.map": "/pathfinder/static/js/main.67bc680a.chunk.js.map",
+    "runtime-main.js": "/pathfinder/static/js/runtime-main.66f80b74.js",
+    "runtime-main.js.map": "/pathfinder/static/js/runtime-main.66f80b74.js.map",
+    "static/js/2.5006c4f9.chunk.js": "/pathfinder/static/js/2.5006c4f9.chunk.js",
+    "static/js/2.5006c4f9.chunk.js.map": "/pathfinder/static/js/2.5006c4f9.chunk.js.map",
+    "index.html": "/pathfinder/index.html",
+    "precache-manifest.a5c174eee4c24a35198d830083b17b66.js": "/pathfinder/precache-manifest.a5c174eee4c24a35198d830083b17b66.js",
+    "service-worker.js": "/pathfinder/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/pathfinder/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.5006c4f9.chunk.js.LICENSE.txt": "/pathfinder/static/js/2.5006c4f9.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/pathfinder/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5cd19ed0.js",
+    "static/js/runtime-main.66f80b74.js",
     "static/js/2.5006c4f9.chunk.js",
     "static/css/main.d1b05096.chunk.css",
-    "static/js/main.6dbf7680.chunk.js"
+    "static/js/main.67bc680a.chunk.js"
   ]
 }
