@@ -74,8 +74,13 @@ let column = row
 const Marker = new Node();
 const Goal = new Node();
 
-for (let i = 0; i < 80; i++) {
-  Marker.down();
-  console.table(Marker.xPos, Marker.yPos);
-};
+Promise.resolve()
+  .then((resolve, reject) => {
+    let acc = [];
+    for (let i = 0; i < 80; i++) {
+      Marker.down();
+      acc.push({xPos: Marker.xPos, yPos: Marker.yPos});
+    };
+  })
+  .then(data => console.table(data));
 
