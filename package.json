@@ -6,9 +6,15 @@
   "author": "Patrick Horne <patrickahorne@gmail.com>",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel serve src/index.html --no-cache --log-level 3",
+    "test": "yarn jest --watch"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
+    "jest": "^25.1.0",
     "parcel": "^1.12.4"
+  },
+  "dependencies": {
+    "d3": "^5.15.0"
   }
 }

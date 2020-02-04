@@ -5,9 +5,11 @@
  * @constructor
  * @param xPos {Number} - The x position
  * @param yPos {Number} - The y position
+ * @param rows {number} - The number of rows there is
+ * @param columns {Number} - The number of columns there is
  * @returns {Object} - A node.
  */
-export default function Node(xPos = 10, yPos = 10) {
+module.exports = function Node (gridData, xPos = 10, yPos = 10) {
   /** the x-position of the node */
   this.xPos = xPos;
   /** the y-position of the node */
@@ -31,7 +33,7 @@ export default function Node(xPos = 10, yPos = 10) {
    * @returns {Number|Null} - y-position if successful, null otherwise
    */
   this.down = () => {
-    if (yPos + 1 < rows) {
+    if (yPos + 1 < gridData.rows) {
       return null;
     } else {
       this.yPos += 1;
