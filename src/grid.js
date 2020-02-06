@@ -1,16 +1,42 @@
 "use strict";
 
 const d3 = require("d3");
-const Cell = require('./Cell');
 
 
 module.exports = function Grid(rows = 10, columns = 10) {
+  function findAdjacent(x, y) {
+    let xLow = x - 1;
+    let xHigh = x + 1;
+    let yLow = y + 1;
+    let yHigh = y - 1;
+
+    if (xLow < 0) {
+      xLow = 0;
+    };
+
+    if (xHigh > columns) {
+      xHigh = columns;
+    };
+
+    if (yLow < 0) {
+      yLow = 0;
+    };
+
+    if (yHigh > rows) {
+      yHigh = rows;
+    };
+
+  }
+
+  // return grid data
   function generateGrid() {
     grid = [];
     for (let x = 0; x < columns; x++) {
       grid.push([]);
       for (let y = 0; y < rows; y++) {
-        grid[x].push(Cell);
+        grid[x].push({
+          passable: true,
+        });
       }
     }
     return grid;
