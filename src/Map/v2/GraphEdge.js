@@ -1,9 +1,7 @@
 'use strict';
 
-module.exports = function GraphEdge() {
-  this.cost = function() {
-    // pythag calc with the absolute thing
-    let Math.abs(this.fromNode.xPos);
-  }
-  this
+module.exports = function GraphEdge(sourceNode, targetNode, cost) {
+  this.sourceNode = sourceNode;
+  this.targetNode = targetNode;
+  this.cost = cost;
 };
