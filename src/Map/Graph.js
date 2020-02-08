@@ -9,15 +9,9 @@ const Edge = require('./GraphEdge');
  * @classdesc A Graph of interconnected nodes
  */
 function Graph() {
-  /**
-   * Cost function abstraction for generalisation purposes. Change this if 
-   * You want the cost function modified
-   * @private
-   */
-  const calculateCost = distanceBetweenNodes;
 
   /**
-   * Helper method specific to this 2d map-stype implementation
+   * Helper method specific to this 2d map-type implementation
    * @private
    */
   const distanceBetweenNodes = function(sourceNode, targetNode) {
@@ -28,7 +22,15 @@ function Graph() {
   };
 
   /**
+   * Cost function abstraction for generalisation purposes. Change this if 
+   * You want the cost function modified
+   * @private
+   */
+  const calculateCost = distanceBetweenNodes;
+
+  /**
    * Adds an edge between two nodes
+   * @method
    */
   this.addEdge = function(sourceNode, targetNode, cost) {
     // Figure out the cost if it wasn't passed into this function
@@ -50,7 +52,8 @@ function Graph() {
    * @param {Number} yPos - The y-position of the node.
    */
   this.addNode = function(xPos, yPos) {
-    let Node = Object.create(GraphNode);
+    let node = new GraphNode(xPos, yPos);
+    this.nodes.push(node)
   };
 
   /**
