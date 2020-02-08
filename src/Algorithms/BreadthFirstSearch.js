@@ -12,8 +12,9 @@ const Pathfinder = require('./PathFinder');
  * @param {Number} end.x - The ending x co-ord
  * @param {Number} end.y - The ending y co-ord
  */
-const BreadthFirstSearch = Object.create(Pathfinder());
+const BreadthFirstSearch = Object.create(Pathfinder);
 
+BreadthFirstSearch.
 
 
 module.exports = BreadthFirstSearch;
