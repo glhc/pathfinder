@@ -75,16 +75,10 @@ describe("Graph", () => {
         faker.random.number(40)
       );
 
-      console.log(testGraph.nodes);
-
       testGraph.connectNearbyNodes(5000);
       expect(firstTestNode.edges).toHaveLength(2);
       expect(secondTestNode.edges).toHaveLength(2);
       expect(thirdTestNode.edges).toHaveLength(2);
-
-      console.log(testGraph.nodes[0]);
-      console.log(testGraph.nodes[1]);
-
     });
   });
 });
