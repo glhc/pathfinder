@@ -2,8 +2,7 @@
 
 import * as d3 from 'd3';
 
-const GridData = require('./GridData');
-const Node = require('./Node');
+const Map = require('./map/Graph');
 
 const gridDatastore = GridData();
 
