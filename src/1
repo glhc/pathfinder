@@ -100,29 +100,19 @@ function Graph() {
     };
   };
 
-  this.generateSeedMap = () => {
+  this.generateSeedMap = (graph) => {
     const config = {
       iMax: 10,
       jMax: 10
     };
 
-    console.log("normalised values:");
-        let info = [];
-
-    let xInterval = Math.floor(window.innerWidth / config.iMax);
-    let yInterval = Math.floor(window.innerHeight / config.jMax);
-
-    const offset = (intervalLength) => Math.random() * intervalLength;
-
-    for (let i = 1; i < config.iMax; i++) {
-      for (let j = 1; j < config.jMax; j++) {
-        let iDistributed = Math.floor((window.innerWidth / i) + offset(xInterval) - offset(xInterval));
-        let jDistributed = Math.floor((window.innerHeight / j) + offset(yInterval) + offset(yInterval));
-        info.push({x: iDistributed, y: jDistributed});
-        this.createNode(iDistributed, jDistributed);
+    for (let i = 0; config.iMax < 10; i++) {
+      for (let j = 0; j < config.jMax; j++) {
+        let iNormalised = Math.floor(screen.innerWidth / config.iMax);
+        let jNormalised = Math.floor(screen.innerWidth / config.jMax);
+        this.createNode(iNormalised, jNormalised)
       }
     }
-    console.table(info);
   };
 };
 

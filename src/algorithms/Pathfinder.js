@@ -2,26 +2,22 @@
 
 /**
  * This is the prototype for all algorithms.
- * @param {Number} start.x - The starting x co-ord
- * @param {Number} start.y - The starting y co-ord
- * @param {Number} end.x - The ending x co-ord
- * @param {Number} end.y - The ending y co-ord
- * @param grid {Array} - The grid
+ * @param {Object} graph - The graph upon which the Pathfinder is to solve
  *
  * @todo - Stack generator function
  * @todo - Queue generator function
  * @todo - Priority queue generator function
  */
-const Pathfinder = {
-  createStack: function createStack() {
+function Pathfinder(graph) {
+  this.createStack = () => {
     return [];
-  },
+  };
 
-  createQueue: function createQueue() {
+    this.createQueue = () => {
     return [];
-  },
+  };
 
-  createPriorityQueue: function createPriorityQueue() {
+    this.createPriorityQueue = () => {
     let priorityQueue = [];
 
     /**
@@ -81,10 +77,14 @@ const Pathfinder = {
     return priorityQueue;
   },
 
-  setStartNode: (x, y, graph) => {
-    let startNode = graph.findNode(x, y, graph);
-    if (startNode) {
-      this.startNode = startNode;
+  this.startNode = null,
+
+  this.setStartNode = (x, y) => {
+    let origin = graph.findNode(x, y);
+
+    if (origin !== undefined) {
+      // console.debug(graph.findNode(x, y))
+      this.startNode = origin;
     } else {
       throw new Error(
         `Couldn't find the start node you specified at x: ${x}, ` +
@@ -93,10 +93,12 @@ const Pathfinder = {
     }
   },
 
-  setEndNode: (x, y, graph) => {
-    let endNode = this.findNode(x, y, graph);
+  this.endNode = () => null;
+
+  this.setEndNode = (x, y) => {
+    let endNode = graph.findNode(x, y);
     if (endNode) {
-      this.endNode = endNode;
+      endNode = endNode;
     } else {
       throw new Error(
         `Couldn't find the end node you specified at x: ${x}, ` +
@@ -104,7 +106,41 @@ const Pathfinder = {
       );
     }
   }
-  
+
+
+  this.solve = (algorithm) => {
+    switch (algorithm) {
+      case 'bfs':
+        this.bfs();
+        break;
+      case 'dfs':
+        this.dfs();
+        break;
+      case 'djistra':
+        this.djikstra();
+        break;
+      case 'a*':
+        this.aStar();
+        break;
+      default:
+        this.aStar();
+    }
+  };
+
+  this.bfs = () => {
+    let f = 0;
+    const openList = this.createQueue();
+    const closedList = this.createStack();
+    const start = this.startNode;
+    const end = this.endNode;
+  };
+
+  this.aStar = () => {
+    // find absolute distance to target after travelling down an edge
+    const heuristic = (candidateNode) => {
+
+    }
+  }
 };
 
 module.exports = Pathfinder;

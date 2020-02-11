@@ -11,7 +11,7 @@ describe("Pathfinder", () => {
 
   beforeEach(() => {
     testGraph = new Graph();
-    testPathfinder = Object.create(Pathfinder);
+    testPathfinder = new Pathfinder(testGraph);
   });
   describe(".PriorityQueue", () => {
     let priorityQueue;
@@ -79,7 +79,16 @@ describe("Pathfinder", () => {
       faker.random.number(100)
     );
     testPathfinder.setStartNode(testStartNode.x, testStartNode.y, testGraph);
-
-    expect(testPathfinder.startNode).toBeEqual(testStartNode);
+    expect(testPathfinder.startNode).toEqual(testStartNode);
   });
+
+  test("Stores a end node", () => {
+    let testEndNode = testGraph.createNode(
+      faker.random.number(100),
+      faker.random.number(100)
+    );
+    testPathfinder.setEndNode(testEndNode.x, testEndNode.y);
+    expect(testPathfinder.endNode).toEqual(testEndNode);
+  });
+
 });
