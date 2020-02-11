@@ -106,8 +106,8 @@ function Graph() {
       jMax: 10
     };
 
-    console.log("normalised values:");
-        let info = [];
+    // console.log("normalised values:");
+      // let info = [];
 
     let xInterval = Math.floor(window.innerWidth / config.iMax);
     let yInterval = Math.floor(window.innerHeight / config.jMax);
@@ -117,12 +117,12 @@ function Graph() {
     for (let i = 1; i < config.iMax; i++) {
       for (let j = 1; j < config.jMax; j++) {
         let iDistributed = Math.floor((window.innerWidth / i) + offset(xInterval) - offset(xInterval));
-        let jDistributed = Math.floor((window.innerHeight / j) + offset(yInterval) + offset(yInterval));
-        info.push({x: iDistributed, y: jDistributed});
+        let jDistributed = Math.floor((window.innerHeight / j) + offset(yInterval) - offset(yInterval));
+        // info.push({x: iDistributed, y: jDistributed});
         this.createNode(iDistributed, jDistributed);
       }
     }
-    console.table(info);
+    // console.table(info);
   };
 };
 
