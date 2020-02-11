@@ -14,7 +14,9 @@ const Pathfinder = require('./PathFinder');
  */
 const BreadthFirstSearch = Object.create(Pathfinder);
 
-BreadthFirstSearch.
+BreadthFirstSearch.openList = [];
+
+
 
 
 module.exports = BreadthFirstSearch;

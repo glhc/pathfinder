@@ -33,13 +33,13 @@ const Pathfinder = {
      * @param {Number} priority - the priority, with higher value = higher priority
      * @returns {Object} - item with priority
      */
-    function prioritisedItem (x, y, priority) {
-      return ({
+    function prioritisedItem(x, y, priority) {
+      return {
         x,
         y,
         priority
-      });
-    };
+      };
+    }
 
     priorityQueue.prioritisedItem = prioritisedItem.bind(priorityQueue);
 
@@ -73,13 +73,38 @@ const Pathfinder = {
      * @returns {Object}
      */
     function dequeue() {
-        return this.shift();
-    };
+      return this.shift();
+    }
 
     priorityQueue.dequeue = dequeue.bind(priorityQueue);
 
     return priorityQueue;
+  },
+
+  setStartNode: (x, y, graph) => {
+    let startNode = graph.findNode(x, y, graph);
+    if (startNode) {
+      this.startNode = startNode;
+    } else {
+      throw new Error(
+        `Couldn't find the start node you specified at x: ${x}, ` +
+          `y: ${y}, graph: ${graph}`
+      );
+    }
+  },
+
+  setEndNode: (x, y, graph) => {
+    let endNode = this.findNode(x, y, graph);
+    if (endNode) {
+      this.endNode = endNode;
+    } else {
+      throw new Error(
+        `Couldn't find the end node you specified at x: ${x}, ` +
+          `y: ${y}, graph: ${graph}`
+      );
+    }
   }
+  
 };
 
 module.exports = Pathfinder;
