@@ -16,7 +16,8 @@ GraphData.generateSeedMap();
 // console.log(GraphData.nodes);
 
 
-let circle = map.selectAll('circle')
+// paint nodes
+let circles = map.selectAll('circle')
   .data(GraphData.nodes)
   .enter().append('circle')
   .attr('cx', (d) => d.xPos)
@@ -25,22 +26,22 @@ let circle = map.selectAll('circle')
   .attr('fill', 'black');
 
 
-// debug
-for (let node of GraphData.nodes) {
-  if (node.edges.length) {
-    console.log(node);
-    for (let edge of node.edges) {
-      console.log(edge);
-    }
-  }
-};
 
-let edges = circle.selectAll('line')
-  .data((d) => d.edges)
-  .enter().append('line')
-  .attr('x2', (edge) => edge.xPos)
+// paint edges
+let edges = circles.selectAll('line')
+  .data((d) => {
+    console.log(d.edges);
+    return d.edges;
+  })
+  .enter().append('line');
+  // .attr('x1', (d) => d.parentElement.xPos)
+  // .attr('y1', (d) => d.parentElement.yPos)
+
+edges
+  .attr('x2', (edge) => edge.parentElement.__data__.xPos)
   .attr('y2', (edge) => edge.yPos)
-  .style('stroke', 'red');
+  .style('stroke', 'red')
+  .style('stroke-width', '2px');
 
 
 

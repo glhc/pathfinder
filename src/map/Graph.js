@@ -58,17 +58,18 @@ function Graph() {
     if (this.nodes.length > 0) {
       for (let node of this.nodes) {
         // create a list of nodes that are within or equal to the cost threshold
-        this.nodes.forEach(candidate => {
-          if (candidate !== node) {
-            let cost = this.calculateCost(node, candidate);
+        this.nodes.forEach(consideredNode => {
+          if (consideredNode !== node) {
+            let cost = this.calculateCost(node, consideredNode);
             if (cost <= costThreshold) {
-              this.addEdge(node, candidate, cost);
+              this.addEdge(node, consideredNode, cost);
             }
           }
         });
       }
     }
   };
+
 
   /**
    * finds a node based on the co-ords provided
@@ -106,9 +107,6 @@ function Graph() {
       jMax: 10
     };
 
-    // console.log("normalised values:");
-      // let info = [];
-
     let xInterval = Math.floor(window.innerWidth / config.iMax);
     let yInterval = Math.floor(window.innerHeight / config.jMax);
 
@@ -122,7 +120,8 @@ function Graph() {
         this.createNode(iDistributed, jDistributed);
       }
     }
-    // console.table(info);
+
+    this.connectNearbyNodes(1000);
   };
 };
 
