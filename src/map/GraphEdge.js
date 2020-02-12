@@ -9,7 +9,7 @@
  * @prop {Node} sourceNode - the source node
  * @prop {Node} targetNode - the target node
  */
-module.exports = function GraphEdge(sourceNode, targetNode, cost) {
+module.exports = function GraphEdge(targetNode, cost) {
   this.targetNode = targetNode;
   this.cost = cost;
 };

@@ -31,7 +31,7 @@ function Graph() {
     }
 
     //add the edge to the source node
-    sourceNode.edges.push(new Edge(sourceNode, targetNode, cost));
+    sourceNode.edges.push(new Edge(targetNode, cost));
   };
 
   /**
@@ -116,8 +116,8 @@ function Graph() {
 
     for (let i = 1; i < config.iMax; i++) {
       for (let j = 1; j < config.jMax; j++) {
-        let iDistributed = Math.floor((window.innerWidth / i) + offset(xInterval) - offset(xInterval));
-        let jDistributed = Math.floor((window.innerHeight / j) + offset(yInterval) - offset(yInterval));
+        let iDistributed = Math.floor((i * xInterval) + offset(xInterval) - offset(xInterval));
+        let jDistributed = Math.floor((j * xInterval) + offset(yInterval) - offset(yInterval));
         // info.push({x: iDistributed, y: jDistributed});
         this.createNode(iDistributed, jDistributed);
       }

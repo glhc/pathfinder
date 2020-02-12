@@ -43,6 +43,8 @@ let edges = circle.selectAll('line')
   .style('stroke', 'red');
 
 
+
+
 // Initialise start and endpoints
 // const Marker = new Node(rows, columns);
 // const Goal = new Node(rows, columns);
