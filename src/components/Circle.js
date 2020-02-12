@@ -5,6 +5,7 @@ export default function Circle() {
     <circle
       cx={100}
       cy={100}
+
     >
     </circle>
   );
