@@ -1,4 +1,4 @@
-"use strict";
+
 
 const GraphNode = require("./GraphNode");
 const Edge = require("./GraphEdge");
@@ -103,8 +103,9 @@ function Graph() {
 
   this.generateSeedMap = () => {
     const config = {
-      iMax: 10,
-      jMax: 10
+      // iMax: Math.floor(0.02 * window.innerWidth),
+      iMax: 16,
+      jMax: 9 
     };
 
     let xInterval = Math.floor(window.innerWidth / config.iMax);
@@ -121,7 +122,7 @@ function Graph() {
       }
     }
 
-    this.connectNearbyNodes(1000);
+    this.connectNearbyNodes(210);
   };
 };
 
