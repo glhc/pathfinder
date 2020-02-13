@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Circle from './Circle';
 import Edge from './Edge';
+import Interface from './Interface';
 
 const Graph = require('../map/Graph');
 const GraphData = new Graph();
 
 export default function Map() {
+  const [totalNodes, setTotalNodes] = useState(100);
 
 
   return(
-    <svg width={window.innerWidth} height={window.innerHeight}>
-      {nodes}
-      {edges}
-    </svg>
+    <>
+      <Interface setTotalNodes={(x) => setTotalNodes(x)}/>
+      <svg width={window.innerWidth} height={window.innerHeight}>
+        {nodes}
+        {edges}
+      </svg>
+    </>
   );
 };
 
@@ -41,5 +46,3 @@ GraphData.nodes.forEach(node => {
     })
   )
 });
-
-console.log(edges)

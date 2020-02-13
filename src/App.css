@@ -1,3 +1,11 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +43,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+aside {
+  height: 19rem;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgba(52, 149, 235, 0.9);
+  padding: 0.5rem 1rem 2rem;
+  align-items: baseline;
+  justify-content: space-around;
+
+}
+
+aside > h1 {
+  align-self: flex-start;
+}
+
+#totalNodes {
+  padding-left: 0.5rem;
 }
