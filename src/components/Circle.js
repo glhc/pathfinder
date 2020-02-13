@@ -1,11 +1,18 @@
 import React from 'react';
 
-export default function Circle() {
+export default function Circle(props) {
+
+  const handleClick = (e) => {
+    console.log('circle clicked!');
+    console.log(props.data);
+  }
   return (
     <circle
-      cx={100}
-      cy={100}
-
+      cx={props.data.xPos}
+      cy={props.data.yPos}
+      r={props.r}
+      color={props.color}
+      onClick={handleClick}
     >
     </circle>
   );

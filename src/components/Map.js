@@ -20,11 +20,11 @@ GraphData.generateSeedMap();
 
 // make a list of the nodes for 
 let nodes = GraphData.nodes.map((node, key) => {
-  return (<circle 
-    key={key}
-    cx={node.xPos}
-    cy={node.yPos}
-    r="5"
+  return (
+    <Circle 
+      data={node}
+      key={key}
+      r="5"
     />)
   });
 
