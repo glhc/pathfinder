@@ -98,7 +98,6 @@ function PathFinder(graph, algorithm = "bfs") {
     let origin = graph.findNode(x, y);
 
     if (origin !== undefined) {
-      // console.debug(graph.findNode(x, y))
       this.startNode = origin;
     } else {
       throw new Error(
@@ -207,7 +206,6 @@ function PathFinder(graph, algorithm = "bfs") {
       const currentNode = openList.shift();
       closedList.push(currentNode);
 
-      debugger;
       if (currentNode.referencedNode === end) {
         this.solution = this.obtainSolution(currentNode);
         break;
