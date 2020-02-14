@@ -17,6 +17,8 @@ function PathFinder(graph, algorithm = "bfs") {
     this.solution = [];
     this.closedList = [];
     this.openList = [];
+    this.endNode = null;
+    this.startNode = null;
   };
 
   this.obtainSolution = (finalPFNode) => {
@@ -120,21 +122,14 @@ function PathFinder(graph, algorithm = "bfs") {
   };
 
   this.solve = () => {
-    switch (this.config.algorithm) {
-      case "bfs":
-        this.bfs();
-        break;
-      case "dfs":
-        this.dfs();
-        break;
-      case "djistra":
-        this.djikstra();
-        break;
-      case "a*":
-        this.aStar();
-        break;
-      default:
-        this.bfs();
+    if (this.config.algorithm === "bfs") {
+      this.bfs();
+    } else if (this.config.algorithm === "dfs") {
+      this.dfs();
+    } else if (this.config.algorithm === "djikstra") {
+      this.djikstra();
+    } else if (this.config.algorithm === "aStar") {
+      this.aStar();
     }
   };
 
@@ -197,13 +192,12 @@ function PathFinder(graph, algorithm = "bfs") {
   // TODO define cost to pass into pathnodes
   // TODO when a known node is updated, the gscore, hscore, fscore would update and so would the priority
   this.djikstra = () => {
-    debugger;
     console.log('djistra triggered');
-    const openList = this.openList;
-    const closedList = this.closedList;
+    let openList = this.openList;
+    let closedList = this.closedList;
 
-    const start = this.startNode;
-    const end = this.endNode;
+    let start = this.startNode;
+    let end = this.endNode;
 
     // add the first node (start node) to the closed list with null parent
     openList.push(new PathNode(start));
@@ -242,7 +236,8 @@ function PathFinder(graph, algorithm = "bfs") {
       openList = openList.sort((a, b) => {
         return a.g - b.g;
       });
-    }
+    };
+
   };
 
 

@@ -83,14 +83,11 @@ aside > h1 {
 #startNode {
   fill: rgba(38, 139, 210, 1) !important;
   r: 14px;
-  transition: all 1s ease-out;
-  transition-delay: 0.5s;
 }
 
 #endNode {
   fill: rgba(203, 75, 22, 1) !important;
   r: 14px;
-  transition: all 1s ease-out;
 }
 
 .solution {

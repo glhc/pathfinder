@@ -58,7 +58,34 @@ export default function Map() {
 
   // clear the map, reset the pathfinding algo
   const resetSolver = () => {
-    console.log("reset solver triggered!");
+    Pathfinder.reset();
+    setSolutionList([]);
+    setSolved(false);
+    GraphData.nodes = [];
+    edges = [];
+    GraphData.generateSeedMap();
+    GraphData.nodes.forEach(node => {
+      let x1 = node.xPos;
+      let y1 = node.yPos;
+      edges.push(
+        node.edges.map((edge, key) => {
+          return (
+            <Edge
+              x1={x1}
+              y1={y1}
+              data={edge}
+              key={key}
+              className={undefined}
+              solutionNodes={Pathfinder.solution}
+            />
+          );
+        })
+      );
+    });
+    setStartNode(undefined);
+    setEndNode(undefined);
+    paintStartNode();
+    paintEndNode();
   };
 
   const setEndpoint = d => {
@@ -196,5 +223,5 @@ GraphData.nodes.forEach(node => {
         />
       );
     })
-  )
+  );
 });
