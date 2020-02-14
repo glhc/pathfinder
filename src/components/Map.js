@@ -16,7 +16,7 @@ export default function Map() {
   const [algorithm, setAlgorithm] = useState("bfs");
   const [startNode, setStartNode] = useState();
   const [endNode, setEndNode] = useState();
-  const [solutionList, setSolutionList] = useState([]);
+  const [solutionList, setSolutionList] = useState();
   let solved = false;
 
   // update the state of the map with the data from the algorithm
@@ -32,16 +32,26 @@ export default function Map() {
     }
   };
 
-  const paint = () => {};
+  const paint = () => {
+    
+  };
 
   const startSolver = () => {
     Pathfinder.startNode = startNode;
     Pathfinder.endNode = endNode;
     Pathfinder.config.algorithm = algorithm;
-    console.log(Pathfinder.config);
     Pathfinder.solve();
+    setSolutionList(Pathfinder.solution)
     solved = true;
-    setSolutionList(Pathfinder.solution);
+
+    let solnComponents = nodes.filter((node) => {
+      return Pathfinder.solution.find((item) => {
+        return node.props.data.xPos === item.xPos;
+      }) 
+    });
+
+    solnComponents.forEach((component) => component.props.conditionals.idValues = 'solution');
+    let tempCoord = nodes[0].props.data.xPos;
   };
 
 
@@ -128,7 +138,6 @@ export default function Map() {
         let nodeIsVisited = closedList.some(item => {
           return item.xPos === xPos && item.yPos === yPos;
         });
-
         if (nodeIsVisited) {
           return "visited";
         }
@@ -145,9 +154,11 @@ export default function Map() {
         color={chooseNodeColor(node)}
         setEndpoint={x => setEndpoint(x)}
         id={printNodeId(node)}
+        conditionals={{}}
       />
     );
   });
+
 
   return (
     <>

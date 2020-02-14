@@ -103,8 +103,8 @@ function Graph() {
   this.generateSeedMap = () => {
     const config = {
       // iMax: Math.floor(0.02 * window.innerWidth),
-      iMax: 10,
-      jMax: 2 
+      iMax: 16,
+      jMax: 9 
     };
 
     let xInterval = Math.floor(window.innerWidth / config.iMax);
@@ -120,7 +120,6 @@ function Graph() {
         this.createNode(iDistributed, jDistributed);
       }
     }
-
     this.connectNearbyNodes(210);
   };
 };
