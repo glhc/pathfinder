@@ -192,7 +192,7 @@ function PathFinder(graph, algorithm = "bfs") {
   // TODO define cost to pass into pathnodes
   // TODO when a known node is updated, the gscore, hscore, fscore would update and so would the priority
   this.djikstra = () => {
-    console.log('djistra triggered');
+    console.log('djikstra triggered');
     let openList = this.openList;
     let closedList = this.closedList;
 
@@ -207,6 +207,7 @@ function PathFinder(graph, algorithm = "bfs") {
       const currentNode = openList.shift();
       closedList.push(currentNode);
 
+      debugger;
       if (currentNode.referencedNode === end) {
         this.solution = this.obtainSolution(currentNode);
         break;
@@ -234,7 +235,7 @@ function PathFinder(graph, algorithm = "bfs") {
       };
 
       openList = openList.sort((a, b) => {
-        return a.g - b.g;
+        return a.g + b.g;
       });
     };
 

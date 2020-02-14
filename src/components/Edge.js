@@ -13,12 +13,6 @@ export default function Edge({ x1, y1, data, solutionNodes}) {
   //y1 needs to match something from soln list
   //y2 needs to match something from soln list
 
-  useEffect(() => {
-    if(solutionNodes) {
-      debugger;
-    }
-  });
-
   const partOfTheSolution = () => {
   let isSolutionPath = false;
     if (solutionNodes) {
