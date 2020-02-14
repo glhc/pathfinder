@@ -107,11 +107,11 @@ export default function Map() {
     
     if (startNode && endNode && closedList){
       // if it's the start node
-      if ([xPos, yPos] === [startNode.xPos, startNode.yPos]) {
-        console.log("start");
+      if (xPos === startNode.xPos && yPos === startNode.yPos) {
+        return "startNode";
         // or if it's the end node
-      } else if ([xPos, yPos] === [endNode.xPos, endNode.yPos]) {
-        console.log("end");
+      } else if (xPos === endNode.xPos && yPos === endNode.yPos) {
+        return "endNode";
       } else {
         // or if it's on the closedList
         let nodeIsVisited = closedList.some(item => {
@@ -119,27 +119,10 @@ export default function Map() {
         });
 
         if (nodeIsVisited) {
-          console.log('node is visited');
-          // return "visited";
+          return "visited";
         }
       }
     }
-
-    // switch ([xPos, yPos]) {
-    //   // it is the start node
-    //   case [startNode.xPos, startNode.yPos]:
-    //     return "startNode";
-    //   // it is the end node
-    //   case [endNode.xPos, endNode.yPos]:
-    //     return "endNode";
-    // };
-
-    // check if the node is on the closed list
-
-    // case: closedList.find
-    //   return "visited";
-    // default:
-    //   return undefined;
   };
 
   let nodes = GraphData.nodes.map((node, key) => {
@@ -170,7 +153,7 @@ export default function Map() {
       </svg>
     </>
   );
-}
+};
 
 GraphData.generateSeedMap();
 

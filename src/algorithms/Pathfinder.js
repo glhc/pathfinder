@@ -6,7 +6,7 @@
  * @todo - Queue generator function
  * @todo - Priority queue generator function
  */
-function Pathfinder(graph, algorithm = 'bfs') {
+function PathFinder(graph, algorithm = 'bfs') {
   this.config = {
     algorithm: algorithm
   };
@@ -43,7 +43,7 @@ function Pathfinder(graph, algorithm = 'bfs') {
 
       if (priority) {
         priorityIndex = priorityQueue.findIndex(
-          element => element.priority == priority
+          element => element.priority === priority
         );
       } else {
         priority = 0;
@@ -117,6 +117,8 @@ function Pathfinder(graph, algorithm = 'bfs') {
     }
   };
 
+  this.closedList = [];
+
   this.bfs = () => {
 
     const openList = [];
@@ -134,9 +136,11 @@ function Pathfinder(graph, algorithm = 'bfs') {
       
       // Make a list of neighour nodes
       let neighbours = this.findAdjacent(currentNode);
-
       // add the newly discovered nodes to the back of the openlist
-      neighbours.foreach(node => closedList.unshift(new PathNode(node, currentNode)));
+      for (let node of neighbours) {
+        let pathNode = new PathNode(node, currentNode);
+        closedList.unshift(pathNode);
+      };
 
       // decide on the next node to move to
       newCurrentNode = currentNode.openList.pop().referencedNode;
@@ -237,4 +241,4 @@ function PathNode(sourceNode, parent = null) {
   this.parent = parent;
 }
 
-module.exports = Pathfinder;
+module.exports = PathFinder;

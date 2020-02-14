@@ -1,18 +1,19 @@
 html {
-    box-sizing: border-box;
-    /* the background color */
-    background-color: rgba(253, 246, 227, 1);
-    /* the circle color*/
-    fill: rgba(88, 110, 117, 1);
-
+  box-sizing: border-box;
+  /* the background color */
+  background-color: rgba(253, 246, 227, 1);
+  /* the circle color*/
+  fill: rgba(88, 110, 117, 1);
 }
 
 svg {
-    color: rga(0, 43, 54, 1);
+  color: rga(0, 43, 54, 1);
 }
 
-*, *:before, *:after {
-    box-sizing: inherit;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 .App {
@@ -85,15 +86,41 @@ aside > h1 {
 
 #startNode {
   fill: rgba(42, 161, 152, 1) !important;
-  border: solid red 2px;
   r: 12px;
   transition: all 1s ease-out;
   transition-delay: 0.5s;
 }
 
 #endNode {
-  fill: rgba(133, 153, 0, 1) !important;
+  fill: rgba(203, 75, 22, 1) !important;
   r: 12px;
   transition: all 1s ease-out;
 }
 
+/* visited edges should be orange
+ * solved path sohuld turn red
+ */
+
+line {
+  stroke: rgba(131, 148, 150, 1);
+}
+
+
+/* SOLARIZED  RGB          */
+/* ---------  -----------  */
+/* base03       0  43  54  */
+/* base02       7  54  66  */
+/* base01      88 110 117  */
+/* base00     101 123 131  */
+/* base0      131 148 150  */
+/* base1      147 161 161  */
+/* base2      238 232 213  */
+/* base3      253 246 227  */
+/* yellow     181 137   0  */
+/* orange     203  75  22  */
+/* red        220  50  47  */
+/* magenta    211  54 130  */
+/* violet     108 113 196  */
+/* blue        38 139 210  */
+/* cyan        42 161 152  */
+/* green      133 153   0  */

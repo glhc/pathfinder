@@ -24,7 +24,7 @@ function Graph() {
    */
   this.addEdge = function(sourceNode, targetNode, cost) {
     // Figure out the cost if it wasn't passed into this function
-    if (cost == undefined) {
+    if (cost === undefined) {
       cost = this.calculateCost(sourceNode, targetNode);
     }
 
@@ -85,7 +85,7 @@ function Graph() {
 
     // if the coords are right, return the node
     return this.nodes.find(node => {
-      return node.x == x && node.y == y;
+      return node.x === x && node.y === y;
     });
   };
 
