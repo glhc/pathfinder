@@ -37,11 +37,18 @@ export default function Map() {
   const startSolver = () => {
     Pathfinder.startNode = startNode;
     Pathfinder.endNode = endNode;
+    Pathfinder.config.algorithm = algorithm;
+    console.log(Pathfinder.config);
     Pathfinder.solve();
     solved = true;
     setSolutionList(Pathfinder.solution);
   };
 
+
+  const handleAlgorithmChange = (newAlgorithm) => {
+    setAlgorithm(newAlgorithm);
+  };
+  
   // clear the map, reset the pathfinding algo
   const resetSolver = () => {
     console.log("reset solver triggered!");
@@ -108,9 +115,8 @@ export default function Map() {
 
   const printNodeId = ({ xPos, yPos }) => {
     let returnValue = undefined;
-
     
-    if (startNode && endNode && closedList){
+    if (startNode && endNode && closedList) {
       // if it's the start node
       if (xPos === startNode.xPos && yPos === startNode.yPos) {
         return "startNode";
@@ -148,7 +154,7 @@ export default function Map() {
       <Interface
         totalNodes={totalNodes}
         setTotalNodes={x => setTotalNodes(x)}
-        setAlgorithm={x => setAlgorithm(x)}
+        setAlgorithm={x => handleAlgorithmChange(x)}
         startSolver={() => startSolver()}
         resetSolver={() => resetSolver()}
       />

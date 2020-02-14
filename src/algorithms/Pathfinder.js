@@ -8,7 +8,7 @@
  */
 function PathFinder(graph, algorithm = "bfs") {
   this.config = {
-    algorithm: algorithm
+    algorithm: algorithm,
   };
 
   this.solution = null;
@@ -162,7 +162,7 @@ function PathFinder(graph, algorithm = "bfs") {
       };
 
       for (let edge of currentNode.referencedNode.edges) {
-        let neighbour = new PathNode(edge.targetNode, currentNode);
+        let neighbour = new PathNode(edge.targetNode, currentNode, edge.cost);
         // do we nkow about this neighbour already
         const searchForPathNode = (pathNode) => neighbour.x === pathNode.x && neighbour.y === pathNode.y;
         
@@ -175,6 +175,7 @@ function PathFinder(graph, algorithm = "bfs") {
           if (knownPathNode.degreesOfSeperation > neighbour.degreesOfSeperation) {
             knownPathNode.parent = neighbour.parent;
             knownPathNode.degreesOfSeperation = neighbour.degreesOfSeperation;
+            knownPathNode.g = neighbour.g;
           }
         } else {
           openList.push(neighbour);
@@ -189,37 +190,62 @@ function PathFinder(graph, algorithm = "bfs") {
 
   // not going to work
   this.dfs = () => {
-    const openList = [];
-    const closedList = [];
-
-    const start = this.startNode;
-    const end = this.endNode;
-    let currentNode = start;
-    closedList.push(new PathNode(start));
-
-    while (currentNode !== end) {
-      // add ajacent nodes to open list
-      currentNode.edges.forEach(edge => openList.push(edge.targetNode));
-
-      // decide which one to go to (dfs: whatever is on top of the stack)
-      currentNode = openList.pop();
-      // put it on the closed List
-      closedList.push(new PathNode(currentNode));
-    }
-
-    // once it's solved, backtrack
-    let solvedPath = [];
-    return solvedPath;
   };
 
 
   // TODO implement setting of this.closedList to empty to empty priority queue
+  // TODO define cost to pass into pathnodes
+  // TODO when a known node is updated, the gscore, hscore, fscore would update and so would the priority
   this.djikstra = () => {
-    let start = this.startNode;
-    let end = this.endNode;
-    let openList = this.createPriorityQueue();
-    let closedList = [];
+    debugger;
+    console.log('djistra triggered');
+    const openList = this.openList;
+    const closedList = this.closedList;
+
+    const start = this.startNode;
+    const end = this.endNode;
+
+    // add the first node (start node) to the closed list with null parent
+    openList.push(new PathNode(start));
+
+    while (openList.length > 0) {
+      // choose best node on the open list
+      const currentNode = openList.shift();
+      closedList.push(currentNode);
+
+      if (currentNode.referencedNode === end) {
+        this.solution = this.obtainSolution(currentNode);
+        break;
+      };
+
+      for (let edge of currentNode.referencedNode.edges) {
+        let neighbour = new PathNode(edge.targetNode, currentNode, edge.cost);
+        // do we nkow about this neighbour already
+        const searchForPathNode = (pathNode) => neighbour.x === pathNode.x && neighbour.y === pathNode.y;
+        
+        // look for a knownPathNode that is on the open or closed list
+        let knownPathNode = openList.find(searchForPathNode) || closedList.find(searchForPathNode);
+
+        // if we know this node
+        if (knownPathNode) {
+          // check it for a better solution
+          if (knownPathNode.g < neighbour.g) {
+            knownPathNode.parent = neighbour.parent;
+            knownPathNode.degreesOfSeperation = neighbour.degreesOfSeperation;
+            knownPathNode.g = neighbour.g;
+          }
+        } else {
+          openList.push(neighbour);
+        };
+      };
+
+      openList = openList.sort((a, b) => {
+        return a.g - b.g;
+      });
+    }
   };
+
+
 
   this.aStar = () => {
     let closedList = this.createPriorityQueue();
@@ -254,20 +280,21 @@ function PathFinder(graph, algorithm = "bfs") {
       //
     }
   };
-}
+};
 
 /**
  * a node to go on the closed list stac
  * @param sourceNode {GraphNode} the graph node this represents
  * @param parent {PathNode} - the parent PathNode
  */
-function PathNode(sourceNode, parent = null) {
+function PathNode(sourceNode, parent = null, cost = 0) {
   this.referencedNode = sourceNode;
   this.x = sourceNode.xPos;
   this.y = sourceNode.yPos;
   this.parent = parent;
 
   this.degreesOfSeperation = parent === null ? 0 : parent.degreesOfSeperation + 1;
-}
+  this.g = parent === null ? 0 : parent.g + cost;
+};
 
 module.exports = PathFinder;
