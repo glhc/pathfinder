@@ -297,4 +297,4 @@ function PathNode(sourceNode, parent = null, cost = 0) {
   this.g = parent === null ? 0 : parent.g + cost;
 };
 
-module.exports = PathFinder;
+export default PathFinder;
