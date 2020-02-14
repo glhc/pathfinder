@@ -6,9 +6,30 @@
  * @todo - Queue generator function
  * @todo - Priority queue generator function
  */
-function PathFinder(graph, algorithm = 'bfs') {
+function PathFinder(graph, algorithm = "bfs") {
   this.config = {
     algorithm: algorithm
+  };
+
+  this.solution = null;
+
+  this.reset = () => {
+    this.solution = [];
+    this.closedList = [];
+    this.openList = [];
+  };
+
+  this.obtainSolution = (finalPFNode) => {
+    let currentNode = finalPFNode;
+    let currentSolution = [];
+
+    while (currentNode !== null) {
+      currentSolution.push(currentNode.referencedNode);
+      currentNode = currentNode.parent;
+    };
+
+    console.log(currentSolution);
+    return currentSolution;
   };
 
   this.PriorityQueue = () => {
@@ -16,7 +37,6 @@ function PathFinder(graph, algorithm = 'bfs') {
     // add with key based on.... hScore?
     // priorityQueue.createPriorityItem
     // Object.defineProperty(priorityQueue, )
-
 
     /**
      * creates an item to add to a priority queue
@@ -69,6 +89,7 @@ function PathFinder(graph, algorithm = 'bfs') {
 
     return priorityQueue;
   };
+
   this.startNode = null;
 
   this.setStartNode = (x, y) => {
@@ -98,8 +119,8 @@ function PathFinder(graph, algorithm = 'bfs') {
     }
   };
 
-  this.solve = algorithm => {
-    switch (algorithm) {
+  this.solve = () => {
+    switch (this.config.algorithm) {
       case "bfs":
         this.bfs();
         break;
@@ -113,56 +134,60 @@ function PathFinder(graph, algorithm = 'bfs') {
         this.aStar();
         break;
       default:
-        this.aStar();
+        this.bfs();
     }
   };
 
   this.closedList = [];
+  this.openList = [];
 
   this.bfs = () => {
-
-    const openList = [];
-    const closedList = [];
+    const openList = this.openList;
+    const closedList = this.closedList;
 
     const start = this.startNode;
     const end = this.endNode;
-    let currentNode = start;
-    let newCurrentNode;
 
     // add the first node (start node) to the closed list with null parent
-    closedList.push(new PathNode(currentNode));
+    openList.push(new PathNode(start));
 
-    while (currentNode !== end) {
-      
-      // Make a list of neighour nodes
-      let neighbours = this.findAdjacent(currentNode);
-      // add the newly discovered nodes to the back of the openlist
-      for (let node of neighbours) {
-        let pathNode = new PathNode(node, currentNode);
-        closedList.unshift(pathNode);
+    while (openList.length > 0) {
+      // choose best node on the open list
+      const currentNode = openList.shift();
+      closedList.push(currentNode);
+
+      if (currentNode.referencedNode === end) {
+        this.solution = this.obtainSolution(currentNode);
+        break;
       };
 
-      // decide on the next node to move to
-      newCurrentNode = currentNode.openList.pop().referencedNode;
+      for (let edge of currentNode.referencedNode.edges) {
+        let neighbour = new PathNode(edge.targetNode, currentNode);
+        // do we nkow about this neighbour already
+        const searchForPathNode = (pathNode) => neighbour.x === pathNode.x && neighbour.y === pathNode.y;
+        
+        // look for a knownPathNode that is on the open or closed list
+        let knownPathNode = openList.find(searchForPathNode) || closedList.find(searchForPathNode);
 
-      // move to the next node
-      closedList.push(new PathNode(newCurrentNode, currentNode));
-      currentNode = newCurrentNode;
-    };
-
-    closedList.push(new PathNode(currentNode));
-
-    // now that it's been solved, traceback from currentNode to origin via parent
-    const solution = [];
-    // set the traceNode to the end of the closedlist
-    let traceNode = closedList[closedList.length - 1];
-    // while (currentNode) {};
+        // if we know this node
+        if (knownPathNode) {
+          // check it for a better solution
+          if (knownPathNode.degreesOfSeperation > neighbour.degreesOfSeperation) {
+            knownPathNode.parent = neighbour.parent;
+            knownPathNode.degreesOfSeperation = neighbour.degreesOfSeperation;
+          }
+        } else {
+          openList.push(neighbour);
+        };
+      };
+    }
   };
 
-  this.findAdjacent = (node) => {
-    return node.edges.map( edge => edge.targetNode);
+  this.findAdjacent = node => {
+    return node.edges.map(edge => edge.targetNode);
   };
 
+  // not going to work
   this.dfs = () => {
     const openList = [];
     const closedList = [];
@@ -187,6 +212,8 @@ function PathFinder(graph, algorithm = 'bfs') {
     return solvedPath;
   };
 
+
+  // TODO implement setting of this.closedList to empty to empty priority queue
   this.djikstra = () => {
     let start = this.startNode;
     let end = this.endNode;
@@ -226,8 +253,8 @@ function PathFinder(graph, algorithm = 'bfs') {
       // map to an array arranged by priority, then join it to the open list
       //
     }
-  }
-};
+  };
+}
 
 /**
  * a node to go on the closed list stac
@@ -239,6 +266,8 @@ function PathNode(sourceNode, parent = null) {
   this.x = sourceNode.xPos;
   this.y = sourceNode.yPos;
   this.parent = parent;
+
+  this.degreesOfSeperation = parent === null ? 0 : parent.degreesOfSeperation + 1;
 }
 
 module.exports = PathFinder;

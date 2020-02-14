@@ -16,6 +16,7 @@ export default function Map() {
   const [algorithm, setAlgorithm] = useState("bfs");
   const [startNode, setStartNode] = useState();
   const [endNode, setEndNode] = useState();
+  const [solutionList, setSolutionList] = useState([]);
   let solved = false;
 
   // update the state of the map with the data from the algorithm
@@ -34,7 +35,11 @@ export default function Map() {
   const paint = () => {};
 
   const startSolver = () => {
-    console.log("solver triggered!");
+    Pathfinder.startNode = startNode;
+    Pathfinder.endNode = endNode;
+    Pathfinder.solve();
+    solved = true;
+    setSolutionList(Pathfinder.solution);
   };
 
   // clear the map, reset the pathfinding algo
@@ -85,20 +90,20 @@ export default function Map() {
   paintEndNode();
 
   const chooseNodeColor = node => {
-    if (!closedList) {
-      // normal node color
-      return "rgba(88, 110, 117, 1)";
+    // if (!closedList) {
+    //   // normal node color
+    //   return "rgba(88, 110, 117, 1)";
 
-      // if the node data is in the closed list, change its color!
-    } else if (
-      closedList.some(
-        pathNode =>
-          pathNode.x === node.data.xPos && pathNode.y === node.data.yPos
-      )
-    ) {
-      // solarizedmagenta
-      return "rgba(211, 54, 130, 1)";
-    }
+    //   // if the node data is in the closed list, change its color!
+    // } else if (
+    //   closedList.some(
+    //     pathNode =>
+    //       pathNode.x === node.data.xPos && pathNode.y === node.data.yPos
+    //   )
+    // ) {
+    //   // solarizedmagenta
+    //   return "rgba(211, 54, 130, 1)";
+    // }
   };
 
   const printNodeId = ({ xPos, yPos }) => {
