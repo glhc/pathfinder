@@ -1,6 +1,3 @@
-'use strict';
-
-
 /**
  * An edge connecting two GraphNodes together
  * @constructor

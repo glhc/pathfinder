@@ -1,5 +1,14 @@
 html {
     box-sizing: border-box;
+    /* the background color */
+    background-color: rgba(253, 246, 227, 1);
+    /* the circle color*/
+    fill: rgba(88, 110, 117, 1);
+
+}
+
+svg {
+    color: rga(0, 43, 54, 1);
 }
 
 *, *:before, *:after {
@@ -51,11 +60,15 @@ aside {
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-color: rgba(52, 149, 235, 0.9);
+  background-color: rgba(38, 139, 210, 0.9);
   padding: 0.5rem 1rem 2rem;
   align-items: baseline;
   justify-content: space-around;
+}
 
+aside > form {
+  display: flex;
+  flex-direction: column;
 }
 
 aside > h1 {
@@ -65,3 +78,22 @@ aside > h1 {
 #totalNodes {
   padding-left: 0.5rem;
 }
+
+.visited {
+  color: red;
+}
+
+#startNode {
+  fill: rgba(42, 161, 152, 1) !important;
+  border: solid red 2px;
+  r: 12px;
+  transition: all 1s ease-out;
+  transition-delay: 0.5s;
+}
+
+#endNode {
+  fill: rgba(133, 153, 0, 1) !important;
+  r: 12px;
+  transition: all 1s ease-out;
+}
+

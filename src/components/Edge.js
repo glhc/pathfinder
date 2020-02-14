@@ -7,8 +7,7 @@ export default function Edge(props) {
       y1={props.y1}
       x2={props.data.targetNode.xPos}
       y2={props.data.targetNode.yPos}
-      stroke="black"
-      
+      stroke="rgba(131, 148, 150, 1)"
     />
   );
 }

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * A Node in the graph
  * @constructor

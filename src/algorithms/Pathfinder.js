@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * This is the prototype for all algorithms.
  * @param {Object} graph - The graph upon which the Pathfinder is to solve
@@ -8,17 +6,17 @@
  * @todo - Queue generator function
  * @todo - Priority queue generator function
  */
-function Pathfinder(graph) {
-  this.createStack = () => {
-    return [];
+function Pathfinder(graph, algorithm = 'bfs') {
+  this.config = {
+    algorithm: algorithm
   };
 
-  this.createQueue = () => {
-    return [];
-  };
+  this.PriorityQueue = () => {
+    let priorityQueue = {};
+    // add with key based on.... hScore?
+    // priorityQueue.createPriorityItem
+    // Object.defineProperty(priorityQueue, )
 
-  (this.PriorityQueue = () => {
-    let priorityQueue = [];
 
     /**
      * creates an item to add to a priority queue
@@ -52,7 +50,7 @@ function Pathfinder(graph) {
       }
 
       // place the item in an array sorted by priority
-      priorityQueue.splice(priorityIndex, prioritisedItem(x, y, priority));
+      // priorityQueue.splice(priorityIndex, prioritisedItem(x, y, priority));
     };
 
     priorityQueue.enqueue = enqueue.bind(priorityQueue);
@@ -70,22 +68,23 @@ function Pathfinder(graph) {
     priorityQueue.dequeue = dequeue.bind(priorityQueue);
 
     return priorityQueue;
-  }),
-    (this.startNode = null),
-    (this.setStartNode = (x, y) => {
-      let origin = graph.findNode(x, y);
+  };
+  this.startNode = null;
 
-      if (origin !== undefined) {
-        // console.debug(graph.findNode(x, y))
-        this.startNode = origin;
-      } else {
-        throw new Error(
-          `Couldn't find the start node you specified at x: ${x}, ` +
-            `y: ${y}, graph: ${graph}`
-        );
-      }
-    }),
-    (this.endNode = () => null);
+  this.setStartNode = (x, y) => {
+    let origin = graph.findNode(x, y);
+
+    if (origin !== undefined) {
+      // console.debug(graph.findNode(x, y))
+      this.startNode = origin;
+    } else {
+      throw new Error(
+        `Couldn't find the start node you specified at x: ${x}, ` +
+          `y: ${y}, graph: ${graph}`
+      );
+    }
+  };
+  this.endNode = () => null;
 
   this.setEndNode = (x, y) => {
     let endNode = graph.findNode(x, y);
@@ -119,43 +118,66 @@ function Pathfinder(graph) {
   };
 
   this.bfs = () => {
-    let f = 0;
 
-    const openList = this.createQueue();
-    const closedList = this.createStack();
-
-    const start = this.startNode;
-    const end = this.endNode;
-    let currentNode = start;
-
-    // add the first node (start node) to the closed list with null parent
-    closedList.push(new PathNode(startNode));
-
-    while (currentNode !== end) {
-      currentNode.edges.forEach(edge => openList.unshift());
-      currentNode.openList.shift();
-    }
-  };
-
-  this.dfs = () => {
-    const openList = this.createStack();
+    const openList = [];
     const closedList = [];
 
     const start = this.startNode;
     const end = this.endNode;
     let currentNode = start;
-    closedList.push(new PathNode(startNode));
+    let newCurrentNode;
+
+    // add the first node (start node) to the closed list with null parent
+    closedList.push(new PathNode(currentNode));
+
+    while (currentNode !== end) {
+      
+      // Make a list of neighour nodes
+      let neighbours = this.findAdjacent(currentNode);
+
+      // add the newly discovered nodes to the back of the openlist
+      neighbours.foreach(node => closedList.unshift(new PathNode(node, currentNode)));
+
+      // decide on the next node to move to
+      newCurrentNode = currentNode.openList.pop().referencedNode;
+
+      // move to the next node
+      closedList.push(new PathNode(newCurrentNode, currentNode));
+      currentNode = newCurrentNode;
+    };
+
+    closedList.push(new PathNode(currentNode));
+
+    // now that it's been solved, traceback from currentNode to origin via parent
+    const solution = [];
+    // set the traceNode to the end of the closedlist
+    let traceNode = closedList[closedList.length - 1];
+    // while (currentNode) {};
+  };
+
+  this.findAdjacent = (node) => {
+    return node.edges.map( edge => edge.targetNode);
+  };
+
+  this.dfs = () => {
+    const openList = [];
+    const closedList = [];
+
+    const start = this.startNode;
+    const end = this.endNode;
+    let currentNode = start;
+    closedList.push(new PathNode(start));
 
     while (currentNode !== end) {
       // add ajacent nodes to open list
-      currentNode.edges.forEach(edge => openlist.push(edge.targetNode));
+      currentNode.edges.forEach(edge => openList.push(edge.targetNode));
 
       // decide which one to go to (dfs: whatever is on top of the stack)
       currentNode = openList.pop();
       // put it on the closed List
       closedList.push(new PathNode(currentNode));
-    };
-    
+    }
+
     // once it's solved, backtrack
     let solvedPath = [];
     return solvedPath;
@@ -169,8 +191,9 @@ function Pathfinder(graph) {
   };
 
   this.aStar = () => {
+    let closedList = this.createPriorityQueue();
     // find absolute distance to target after travelling down an edge
-    const h = (candidateNode) => {
+    const h = candidateNode => {
       let manhattanDistance =
         Math.abs(end.xPos - candidateNode.xPos) +
         Math.abs(end.yPos - candidateNode.yPos);
@@ -178,14 +201,13 @@ function Pathfinder(graph) {
     };
 
     // current cost so far
-    const g = (pathNodeIndex) => {
+    const g = pathNodeIndex => {
       let gScore = 0;
       let finishedBacktrack = false;
-      
+
       while (!finishedBacktrack) {
         //TODO traverse backwards through the closedList parent thingy
-      closedList[pathNodeIndex];
-
+        // closedList[pathNodeIndex];
       }
 
       return gScore;
@@ -193,15 +215,15 @@ function Pathfinder(graph) {
 
     const start = this.startNode;
     const end = this.endNode;
-    let openList = new pr;
+    let openList = this.createpriorityQueue();
     let currentNode = start;
-    closedList.push(new PathNode(startNode));
+    closedList.push(new PathNode(start));
     while (currentNode !== end) {
       // map to an array arranged by priority, then join it to the open list
       //
     }
-  };
-}
+  }
+};
 
 /**
  * a node to go on the closed list stac

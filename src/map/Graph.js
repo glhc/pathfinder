@@ -1,5 +1,3 @@
-
-
 const GraphNode = require("./GraphNode");
 const Edge = require("./GraphEdge");
 
@@ -85,6 +83,7 @@ function Graph() {
     //   return Math.sqrt(xDist * xDist + yDist * yDist) <= radius;
     // });
 
+    // if the coords are right, return the node
     return this.nodes.find(node => {
       return node.x == x && node.y == y;
     });
