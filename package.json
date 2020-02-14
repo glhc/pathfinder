@@ -1,6 +1,6 @@
 {
   "name": "pathfinder",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "index.js",
   "repository": "git@github.com:glhc/pathfinder.git",
   "author": "Patrick Horne <patrickahorne@gmail.com>",
@@ -22,6 +22,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "classnames": "^2.2.6",
     "d3": "^5.15.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

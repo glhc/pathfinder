@@ -80,26 +80,30 @@ aside > h1 {
   padding-left: 0.5rem;
 }
 
-.visited {
-  color: red;
-}
-
 #startNode {
-  fill: rgba(42, 161, 152, 1) !important;
-  r: 12px;
+  fill: rgba(38, 139, 210, 1) !important;
+  r: 14px;
   transition: all 1s ease-out;
   transition-delay: 0.5s;
 }
 
 #endNode {
   fill: rgba(203, 75, 22, 1) !important;
-  r: 12px;
+  r: 14px;
   transition: all 1s ease-out;
 }
 
-/* visited edges should be orange
- * solved path sohuld turn red
- */
+.solution {
+  fill: rgba(203, 75, 22, 1);
+  r: 10px;
+  transition: all 2s ease-out;
+}
+
+line.solution {
+  stroke: rgba(108, 113, 196);
+  stroke-width: 4px;
+  transition: all 3s ease-out;
+}
 
 line {
   stroke: rgba(131, 148, 150, 1);

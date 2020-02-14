@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import Circle from "./Circle";
 import Edge from "./Edge";
 import Interface from "./Interface";
+import SolnCircle from "./SolnCircle";
 import PathFinder from "../algorithms/Pathfinder";
 
 const Graph = require("../map/Graph");
@@ -16,8 +18,8 @@ export default function Map() {
   const [algorithm, setAlgorithm] = useState("bfs");
   const [startNode, setStartNode] = useState();
   const [endNode, setEndNode] = useState();
-  const [solutionList, setSolutionList] = useState();
-  let solved = false;
+  const [solutionList, setSolutionList] = useState([]);
+  const [solved, setSolved] = useState(false);
 
   // update the state of the map with the data from the algorithm
   const tick = () => {
@@ -32,33 +34,28 @@ export default function Map() {
     }
   };
 
-  const paint = () => {
-    
-  };
+  const paint = () => {};
+
+  let solutionNodes = [];
 
   const startSolver = () => {
     Pathfinder.startNode = startNode;
     Pathfinder.endNode = endNode;
     Pathfinder.config.algorithm = algorithm;
     Pathfinder.solve();
-    setSolutionList(Pathfinder.solution)
-    solved = true;
-
-    let solnComponents = nodes.filter((node) => {
-      return Pathfinder.solution.find((item) => {
-        return node.props.data.xPos === item.xPos;
-      }) 
-    });
-
-    solnComponents.forEach((component) => component.props.conditionals.idValues = 'solution');
-    let tempCoord = nodes[0].props.data.xPos;
+    setSolutionList(Pathfinder.solution);
+    // setSolved(true);
+    // solutionNodes = Pathfinder.solution.map((node, key) => {
+    //   return (
+    //     ''
+    //   );
+    // });
   };
 
-
-  const handleAlgorithmChange = (newAlgorithm) => {
+  const handleAlgorithmChange = newAlgorithm => {
     setAlgorithm(newAlgorithm);
   };
-  
+
   // clear the map, reset the pathfinding algo
   const resetSolver = () => {
     console.log("reset solver triggered!");
@@ -110,7 +107,6 @@ export default function Map() {
     // if (!closedList) {
     //   // normal node color
     //   return "rgba(88, 110, 117, 1)";
-
     //   // if the node data is in the closed list, change its color!
     // } else if (
     //   closedList.some(
@@ -125,7 +121,7 @@ export default function Map() {
 
   const printNodeId = ({ xPos, yPos }) => {
     let returnValue = undefined;
-    
+
     if (startNode && endNode && closedList) {
       // if it's the start node
       if (xPos === startNode.xPos && yPos === startNode.yPos) {
@@ -154,11 +150,11 @@ export default function Map() {
         color={chooseNodeColor(node)}
         setEndpoint={x => setEndpoint(x)}
         id={printNodeId(node)}
-        conditionals={{}}
+        solutionNodes={solutionList}
+        isSolved={solved}
       />
     );
   });
-
 
   return (
     <>
@@ -175,7 +171,7 @@ export default function Map() {
       </svg>
     </>
   );
-};
+}
 
 GraphData.generateSeedMap();
 
@@ -190,8 +186,15 @@ GraphData.nodes.forEach(node => {
   edges.push(
     node.edges.map((edge, key) => {
       return (
-        <Edge x1={x1} y1={y1} data={edge} key={key} className={undefined} />
+        <Edge
+          x1={x1}
+          y1={y1}
+          data={edge}
+          key={key}
+          className={undefined}
+          solutionNodes={Pathfinder.solution}
+        />
       );
     })
-  );
+  )
 });

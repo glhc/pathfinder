@@ -1,27 +1,43 @@
-import React from 'react';
+import React from "react";
+import classNames from 'classnames';
 
-export default function Circle({data, r, color, setEndpoint, id, conditionals}) {
+export default function Circle({
+  data,
+  r,
+  color,
+  setEndpoint,
+  solutionNodes,
+  id,
+  isSolved
+}) {
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     console.log(e);
-    setEndpoint(data)
+    setEndpoint(data);
   };
 
-
-  const idString = () => {
-    return id ? id.join(' ') : undefined;
+  const partOfTheSolution = () => {
+    if (solutionNodes) {
+      return solutionNodes.some(
+        node => node.xPos === data.xPos && node.yPos === data.yPos
+      );
+    }
   };
+
+  let classes = classNames({
+    circle: true,
+    solution: partOfTheSolution()
+  });
 
   return (
     <circle
-      className="circle"
       cx={data.xPos}
       cy={data.yPos}
       r={r}
       fill={color}
       onClick={handleClick}
-      id={idString}
-    >
-    </circle>
+      id={id ? id : undefined}
+      className={classes}
+    ></circle>
   );
-};
+}
