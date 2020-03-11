@@ -9,7 +9,7 @@
 
 It can:
 
-- Randomly generate nodes on the screen.
+- Randomly generate a map of nodes.
 - Connect nearby nodes together.
 - Search from the start node for a path to the end node.
 - Render a solution to the screen
