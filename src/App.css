@@ -82,12 +82,12 @@ aside > h1 {
 
 #startNode {
   fill: rgba(38, 139, 210, 1) !important;
-  r: 14px;
+  r: 13px;
 }
 
 #endNode {
   fill: rgba(203, 75, 22, 1) !important;
-  r: 14px;
+  r: 13px;
 }
 
 .solution {

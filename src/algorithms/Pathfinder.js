@@ -11,6 +11,7 @@ function PathFinder(graph, algorithm = "bfs") {
     algorithm: algorithm,
   };
 
+  // will become an array
   this.solution = null;
 
   this.reset = () => {

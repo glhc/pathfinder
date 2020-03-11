@@ -14,4 +14,4 @@ It can:
 - Search from the start node for a path to the end node.
 - Render a solution to the screen
 
-Give it a try: [](https://glhc.github.io/pathfinder/)
+Give it a try: [https://glhc.github.io/pathfinder/](https://glhc.github.io/pathfinder/)
